@@ -1,5 +1,5 @@
 """
-ASGI config for mikasa project.
+ASGI config for micasa project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
