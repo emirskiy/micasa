@@ -41,15 +41,22 @@ class Color(models.Model):
 
 
 class Product(models.Model):
-    name = models.CharField(max_length=255)
-    description = models.TextField()
+    nomenclature = models.IntegerField(max_length=255, unique=True, null=True)
+    photo = models.ImageField(upload_to='product/images/')
+    article = models.IntegerField(max_length=55, null=True)
+    description = models.TextField(null=True)
+    price = models.DecimalField(max_digits=10, decimal_places=2, null=True)
+    characteristics = models.TextField(null=True)
+    quantity = models.IntegerField(max_length=1000, null=True)
+
+
     height = models.DecimalField(max_digits=5, decimal_places=2, blank=True)
     length = models.DecimalField(max_digits=5, decimal_places=2, blank=True)
-    depth = models.DecimalField(max_digits=5, decimal_places=2, blank=True)
-    price = models.DecimalField(max_digits=10, decimal_places=2)
+    depth = models.DecimalField(max_digits=5, decimal_places=2, blank=True)      # размеры продукта
     discount = models.DecimalField(max_digits=5, decimal_places=2, blank=True)
+
+
     created_at = models.DateTimeField(default=timezone.now)
-    photo = models.ImageField(upload_to='product/images/')
 
     product_class = models.ForeignKey(ProductClass, null=True, on_delete=models.CASCADE)
     category = models.ForeignKey(Category, null=True, on_delete=models.CASCADE)
