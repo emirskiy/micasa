@@ -3,17 +3,17 @@ from django.utils import timezone
 
 # Create your models here.
 
-class ProductClass(models.Model):
-    name = models.CharField(max_length=100)
-    created_at = models.DateField(default=timezone.now)
+# class ProductClass(models.Model):
+#     name = models.CharField(max_length=100)
+#     created_at = models.DateField(default=timezone.now)
 
-    def __str__(self) -> str:
-        return self.name
+#     def __str__(self) -> str:
+#         return self.name
 
 
 class Category(models.Model):
     name = models.CharField(max_length=100)
-    product_class = models.ForeignKey(ProductClass, on_delete=models.CASCADE)
+    # product_class = models.ForeignKey(ProductClass, on_delete=models.CASCADE)
 
     def __str__(self) -> str:
         return self.name
@@ -41,13 +41,13 @@ class Color(models.Model):
 
 
 class Product(models.Model):
-    nomenclature = models.IntegerField(max_length=255, unique=True, null=True)
+    nomenclature = models.IntegerField(unique=True, null=True)
     photo = models.ImageField(upload_to='product/images/')
-    article = models.IntegerField(max_length=55, null=True)
+    article = models.IntegerField(null=True)
     description = models.TextField(null=True)
     price = models.DecimalField(max_digits=10, decimal_places=2, null=True)
     characteristics = models.TextField(null=True)
-    quantity = models.IntegerField(max_length=1000, null=True)
+    quantity = models.IntegerField(null=True)
 
 
     height = models.DecimalField(max_digits=5, decimal_places=2, blank=True)
@@ -58,7 +58,7 @@ class Product(models.Model):
 
     created_at = models.DateTimeField(default=timezone.now)
 
-    product_class = models.ForeignKey(ProductClass, null=True, on_delete=models.CASCADE)
+    # product_class = models.ForeignKey(ProductClass, null=True, on_delete=models.CASCADE)
     category = models.ForeignKey(Category, null=True, on_delete=models.CASCADE)
     subcategory = models.ForeignKey(Subcategory, null=True, on_delete=models.CASCADE)
 
@@ -67,3 +67,6 @@ class Product(models.Model):
 
     def __str__(self) -> str:
         return self.name
+    
+
+
