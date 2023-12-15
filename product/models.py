@@ -19,9 +19,12 @@ class Category(models.Model):
         return self.name
 
 class Subcategory(models.Model):
-    type = models.IntegerField()
+    # type = models.IntegerField()
+    name = models.CharField(max_length=155)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
 
+    def __str__(self) -> str:
+        return self.name
 
 
 class Material(models.Model):
@@ -41,7 +44,7 @@ class Color(models.Model):
 
 
 class Product(models.Model):
-    nomenclature = models.IntegerField(unique=True, null=True)
+    name = models.CharField(unique=True, null=False)
     photo = models.ImageField(upload_to='product/images/')
     article = models.IntegerField(null=True)
     description = models.TextField(null=True)
@@ -50,10 +53,10 @@ class Product(models.Model):
     quantity = models.IntegerField(null=True)
 
 
-    height = models.DecimalField(max_digits=5, decimal_places=2, blank=True)
-    length = models.DecimalField(max_digits=5, decimal_places=2, blank=True)
-    depth = models.DecimalField(max_digits=5, decimal_places=2, blank=True)      # размеры продукта
-    discount = models.DecimalField(max_digits=5, decimal_places=2, blank=True)
+    height = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
+    length = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
+    depth = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)      # размеры продукта
+    discount = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
 
 
     created_at = models.DateTimeField(default=timezone.now)
