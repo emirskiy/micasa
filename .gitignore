@@ -59,7 +59,7 @@ cover/
 *.pot
 
 #xlsx
-*.xlsx
+menu.xlsx
 
 # Django stuff:
 *.log
