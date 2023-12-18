@@ -8,14 +8,23 @@ class UserManager(BaseUserManager):
     def create_user(self, email, password, **extra_fields):
         if not email:
             raise ValueError('User must have an email address')
+
+        if len(password) < 8 or len(password) > 123:
+            raise ValueError('Пароль должен содержать минимум 8 символов')
+        
         user = self.model(
             email = self.normalize_email(email),
         )
         user.set_password(password)
         user.save()
         return user
+        
     
     def create_superuser(self, email, password):
+
+        if len(password) < 8 or len(password) > 123:
+            raise ValueError('Пароль должен содержать минимум 8 символов')
+        
         user = self.create_user(email, password=password)
         user.is_staff = True
         user.is_superuser = True
